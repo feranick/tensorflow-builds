@@ -8,17 +8,17 @@ These packages were compiled using standard tensorflow [compilation
                                                         guidelines](https://www.tensorflow.org/install/install_sources). 
 Compilation was carried out using -mnative flags.
 
-git clone https://github.com/tensorflow/tensorflow
+`git clone https://github.com/tensorflow/tensorflow`
 
-cd tensorflow
+`cd tensorflow`
 
-git checkout r1.2
+`git checkout r1.2`
 
-./configure
+`./configure`
 
-bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package
+`bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package`
 
-bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
+`bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg`
 
 **Configuration**:
 ./configure was run with support for:
