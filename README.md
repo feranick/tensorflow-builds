@@ -12,11 +12,17 @@ Compilation was carried out using -mnative flags.
 
 `cd tensorflow`
 
-`git checkout r1.2`
+`git checkout r1.3`
 
 `./configure`
 
+If compiling for a CPU-based system:
+
 `bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package`
+
+If compiling for a GPU-CUDA-based system:
+
+`bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package`
 
 `bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg`
 
@@ -31,5 +37,21 @@ https://www.dropbox.com/sh/f40eb6xsioj74il/AADHVj0hDxxo0yyv43Myvg65a?dl=0
 Supported platforms:
 ====================
 
-- MacOS - Sierra, no GPU, Python 3.6
-- Linux x86-64 - Ubuntu 16.04, no GPU, Python 3.5 
+- MacOS - 10.12, no GPU, Python 3.6
+- Linux x86-64:
+  - Ubuntu 16.04, no GPU, Python 3.5 
+  - Ubuntu 16.04, CUDA 8.0, Python3.5
+  - CentOS 7.3, no GPU, Python3.6
+  
+Known issues:
+=============
+Compilation is broken for tensorflow-gpu using bazel 0.5.3 (fixed in tensorflow 1.4+). To fix it, either use bazel 0.5.2
+or change in: 
+
+`tensorflow/third_party/gpus/cuda_configure.bzl`
+
+line 109:
+
+`-  return [repository_ctx.path(_cxx_inc_convert(p))
++  return [str(repository_ctx.path(_cxx_inc_convert(p)))
+    for p in inc_dirs.split("\n")]`
