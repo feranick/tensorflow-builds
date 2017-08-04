@@ -50,8 +50,9 @@ or change in:
 
 `tensorflow/third_party/gpus/cuda_configure.bzl`
 
-line 109:
+line 109 from:
 
-`-  return [repository_ctx.path(_cxx_inc_convert(p))
-+  return [str(repository_ctx.path(_cxx_inc_convert(p)))
-    for p in inc_dirs.split("\n")]`
+`return [repository_ctx.path(_cxx_inc_convert(p))`
+
+to:
+`return [str(repository_ctx.path(_cxx_inc_convert(p)))`
