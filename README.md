@@ -43,6 +43,13 @@ Supported platforms:
   - Ubuntu 16.04, CUDA 8.0, Python3.5
   - CentOS 7.3, no GPU, Python3.6
   
+Benchmarking:
+==============
+
+There are several benchmarking options. One derived from [here](https://github.com/tobigithub/tensorflow-deep-learning/wiki/tf-benchmarks) is provided. To run:
+
+`python3 benchmark.py`  
+  
 Known issues:
 =============
 Compilation is broken for tensorflow-gpu using bazel 0.5.3 (fixed in tensorflow 1.4+). To fix it, either use bazel 0.5.2
