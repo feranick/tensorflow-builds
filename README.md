@@ -38,9 +38,13 @@ Binaries with NVidia GPU support are built with NCCL (version 2.2)  and TensorRT
 To compile with both, you need binaries from NVidia, installed using apt-get. From there:
 
 `sudo apt-get install tensorrt libnccl2 libnccl-dev`
+
 `cd /usr/local/cuda-9.2`
+
 `sudo ln -s /usr/include/nccl.h include`
+
 `sudo mkdir lib`
+
 `sudo ln -s /usr/lib/x86_64-linux-gnu/libnccl.so.2 lib`
 
 Binaries:
