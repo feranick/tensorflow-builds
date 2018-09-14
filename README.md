@@ -12,7 +12,7 @@ Compilation was carried out using -mnative flags.
 
 `cd tensorflow`
 
-`git checkout r1.3`
+`git checkout r1.10`
 
 `./configure`
 
@@ -28,7 +28,20 @@ If compiling for a GPU-CUDA-based system:
 
 **Configuration**:
 ./configure was run with support for:
-- Google Cloud Compute support (TensorFlow 1.2+).
+- Google Cloud Compute, Amazon AWS, Hadoop File System support.
+
+GPU Support
+===========
+Binaries are build using CUDA Toolkit 9.2
+Binaries with NVidia GPU support are built with NCCL (version 2.2)  and TensorRT support.
+
+To compile with both, you need binaries from NVidia, installed using apt-get. From there:
+
+`sudo apt-get install tensorrt libnccl2 libnccl-dev`
+`cd /usr/local/cuda-9.2`
+`sudo ln -s /usr/include/nccl.h include`
+`sudo mkdir lib`
+`sudo ln -s /usr/lib/x86_64-linux-gnu/libnccl.so.2 lib`
 
 Binaries:
 =========
@@ -40,7 +53,7 @@ Supported platforms:
 - MacOS - 10.12, no GPU, Python 3.6
 - Linux x86-64:
   - Ubuntu 16.04, no GPU, Python 3.5 
-  - Ubuntu 16.04, CUDA 8.0, Python3.5
+  - Ubuntu 16.04, CUDA 9.2, Python3.5
   - CentOS 7.3, no GPU, Python3.6
   
 Benchmarking:
