@@ -49,9 +49,6 @@ To compile with both, you need binaries from NVidia, installed using apt-get. Fr
 
 Binaries:
 =========
-https://drive.google.com/open?id=1gWWipUgMevjWZ5Dq__BjUA7-vJewS3K7
-
-Old repository, soon to be discontinued):
 https://www.dropbox.com/sh/f40eb6xsioj74il/AADHVj0hDxxo0yyv43Myvg65a?dl=0
 
 Supported platforms:
