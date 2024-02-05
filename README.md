@@ -4,15 +4,22 @@ Tensorflow binary builds for some platforms
 Compilation
 ===========
 
-These packages were compiled using standard tensorflow [compilation
-                                                        guidelines](https://www.tensorflow.org/install/install_sources). 
+These packages were compiled using standard tensorflow [compilation                                                        guidelines](https://www.tensorflow.org/install/install_sources). 
+
+Prerequiresites and installed packages:
+```
+sudo apt install libstdc++-12-dev:amd64 python3-pip python3-wheel python3-requests
+sudo pip3 install pip numpy packaging opt_einsum grpcio flatbuf
+sudo pip3 install keras_preprocessing --no-deps
+```
+
 Compilation was carried out using -mnative flags.
 
 `git clone https://github.com/tensorflow/tensorflow`
 
 `cd tensorflow`
 
-`git checkout r1.14`
+`git checkout v2.15.0`
 
 `./configure`
 
