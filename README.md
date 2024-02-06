@@ -74,3 +74,7 @@ Benchmarking:
 There are several benchmarking options. One derived from [here](https://github.com/tobigithub/tensorflow-deep-learning/wiki/tf-benchmarks) is provided. To run:
 
 `python3 benchmark.py`  
+
+Known Issues:
+==============
+As of version `2.15.0`, Tensorflow as moved to `clang` as the main compiler. Unfortunately compilation is broken in Ubuntu with GPU support, so the use of `nvcc` is recommended. 
