@@ -1,5 +1,7 @@
 # tensorflow-builds
-Tensorflow binary builds for some platforms
+Tensorflow building information and binaries for selected platforms. 
+Note: they may not work on your systems as they are highly customized during compilation.
+Use at your own risk. No warranty or guarantee is provided.
 
 ## Compilation
 
