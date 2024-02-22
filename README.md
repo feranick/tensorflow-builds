@@ -1,7 +1,7 @@
 # tensorflow-builds
 Tensorflow binary builds for some platforms
 
-Compilation
+## Compilation
 ===========
 
 These packages were compiled using standard tensorflow [compilation                                                        guidelines](https://www.tensorflow.org/install/install_sources). 
@@ -37,7 +37,18 @@ If compiling for a GPU-CUDA-based system:
 ./configure was run with support for:
 - Google Cloud Compute, Amazon AWS, Hadoop File System support.
 
-GPU Support
+### Optimizations
+For additional optimizations, build with `native` support can be enabled by adding the folllowing to `.bazelrc` after running the above `./configure` step
+
+```
+build:linux --copt=-march=native
+```
+or (for MacOS):
+```
+build:macos --copt=-march=native
+```
+
+## GPU Support
 ===========
 Binaries are build using CUDA Toolkit 10.1
 Binaries with NVidia GPU support are built with NCCL (version 2.2)  and TensorRT support.
@@ -54,11 +65,11 @@ To compile with both, you need binaries from NVidia, installed using apt-get. Fr
 
 `sudo ln -s /usr/lib/x86_64-linux-gnu/libnccl.so.2 lib`
 
-Binaries:
+## Binaries:
 =========
 https://www.dropbox.com/sh/f40eb6xsioj74il/AADHVj0hDxxo0yyv43Myvg65a?dl=0
 
-Supported platforms:
+##Supported platforms:
 ====================
 
 Currently supported platforms
@@ -68,13 +79,25 @@ Currently supported platforms
   - Ubuntu 18.04, CUDA 10.1, Python3.6
   - CentOS 7.3, no GPU, Python3.6
   
-Benchmarking:
+## Benchmarking:
 ==============
 
 There are several benchmarking options. One derived from [here](https://github.com/tobigithub/tensorflow-deep-learning/wiki/tf-benchmarks) is provided. To run:
 
 `python3 benchmark.py`  
 
-Known Issues:
+## Known Issues:
 ==============
-As of version `2.15.0`, Tensorflow as moved to `clang` as the main compiler. Unfortunately compilation is broken in Ubuntu with GPU support, so the use of `nvcc` is recommended. 
+1. As of version `2.15.0`, Tensorflow as moved to `clang` as the main compiler. Unfortunately compilation is broken in Ubuntu with GPU support, so the use of `nvcc` is recommended. 
+2. The linker provided with XCode may be lead to a crash when compiling for MacOS. In case of a compilation crash, a "classic" linker can be invoked by adding the following line to `tensorflow/tensorflow.bzl`:
+```
+
+    def pywrap_tensorflow_macro_opensource(
+         clean_dep("//tensorflow:macos"): [
+             # TODO: the -w suppresses a wall of harmless warnings about hidden typeinfo symbols
+             # not being exported.  There should be a better way to deal with this.
++            "-ld_classic",
+             "-Wl,-w",
+             "-Wl,-exported_symbols_list,$(location %s.lds)" % vscriptname,
+         ], 
+```
