@@ -2,7 +2,6 @@
 Tensorflow binary builds for some platforms
 
 ## Compilation
-===========
 
 These packages were compiled using standard tensorflow [compilation                                                        guidelines](https://www.tensorflow.org/install/install_sources). 
 
@@ -49,15 +48,14 @@ build:macos --copt=-march=native
 ```
 
 ## GPU Support
-===========
-Binaries are build using CUDA Toolkit 10.1
-Binaries with NVidia GPU support are built with NCCL (version 2.2)  and TensorRT support.
+Binaries are build using CUDA Toolkit 12.2. [You may need to activate NVidia develoepr repos](https://developer.nvidia.com/cuda-toolkit)
+Binaries with NVidia GPU support TensorRT support (v.8.9) and libnccl2.
 
 To compile with both, you need binaries from NVidia, installed using apt-get. From there:
 
-`sudo apt-get install tensorrt libnccl2 libnccl-dev`
+`sudo apt-get install tensorrt libnccl2 libnccl-dev, tensorrt`
 
-`cd /usr/local/cuda-10.1`
+`cd /usr/local/cuda-12.2`
 
 `sudo ln -s /usr/include/nccl.h include`
 
@@ -66,12 +64,10 @@ To compile with both, you need binaries from NVidia, installed using apt-get. Fr
 `sudo ln -s /usr/lib/x86_64-linux-gnu/libnccl.so.2 lib`
 
 ## Binaries:
-=========
 https://www.dropbox.com/sh/f40eb6xsioj74il/AADHVj0hDxxo0yyv43Myvg65a?dl=0
 
-##Supported platforms:
-====================
-
+## Supported platforms:
+ 
 Currently supported platforms
 - MacOS - 10.12, no GPU, Python 3.7
 - Linux x86-64:
@@ -80,14 +76,12 @@ Currently supported platforms
   - CentOS 7.3, no GPU, Python3.6
   
 ## Benchmarking:
-==============
 
 There are several benchmarking options. One derived from [here](https://github.com/tobigithub/tensorflow-deep-learning/wiki/tf-benchmarks) is provided. To run:
 
 `python3 benchmark.py`  
 
 ## Known Issues:
-==============
 1. As of version `2.15.0`, Tensorflow as moved to `clang` as the main compiler. Unfortunately compilation is broken in Ubuntu with GPU support, so the use of `nvcc` is recommended. 
 2. The linker provided with XCode may be lead to a crash when compiling for MacOS. In case of a compilation crash, a "classic" linker can be invoked by adding the following line to `tensorflow/tensorflow.bzl`:
 ```
