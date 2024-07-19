@@ -26,6 +26,11 @@ Compilation was carried out using -mnative flags.
 
 `./configure`
 
+***Note***
+During compilations, additional can be added when asked, and will be included through the flag `--config=opt`. These are recommended:
+
+`-Wno-sign-compare -Wno-error=unused-command-line-argument -O3`
+
 If compiling for a CPU-based system:
 
 `bazel build --config=opt //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow_cpu`
