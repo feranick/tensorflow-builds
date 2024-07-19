@@ -28,13 +28,13 @@ Compilation was carried out using -mnative flags.
 
 If compiling for a CPU-based system:
 
-`bazel build //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow_cpu`
+`bazel build --config=opt //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow_cpu`
 
 For versions of TF < 2.17.0:
 `bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package`
 
 If compiling for a GPU-CUDA-based system:
-`bazel build //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow --config=cuda`
+`bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow`
 
 For versions of TF < 2.17.0:
 `bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package`
