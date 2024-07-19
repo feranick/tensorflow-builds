@@ -22,18 +22,24 @@ Compilation was carried out using -mnative flags.
 
 `cd tensorflow`
 
-`git checkout v2.15.0`
+`git checkout v2.17.0`
 
 `./configure`
 
 If compiling for a CPU-based system:
 
+`bazel build //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow_cpu`
+
+For versions of TF < 2.17.0:
 `bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package`
 
 If compiling for a GPU-CUDA-based system:
+'bazel build //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow --config=cuda'
 
+For versions of TF < 2.17.0:
 `bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package`
 
+To create a wheel package:
 `bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg`
 
 **Configuration**:
@@ -66,6 +72,17 @@ To compile with both, you need binaries from NVidia, installed using apt-get. Fr
 `sudo mkdir lib`
 
 `sudo ln -s /usr/lib/x86_64-linux-gnu/libnccl.so.2 lib`
+
+## Docker builds
+Linux distributions may come with outdated version of compilers and libraries that are not compatible with the most recent version of TF. The easiest way to compile it is to use docker. Run this command to get a docker image on a bash, from where you can then proceed with the regular compilation:
+
+`docker run --rm -it --entrypoint bash tensorflow/build:2.17-python3.10`
+
+Choose the image you need from here: https://hub.docker.com/r/tensorflow/build/tags
+
+Once completed, you can purge all docker images with:
+
+`docker system prune -a`
 
 ## Binaries:
 https://www.dropbox.com/sh/f40eb6xsioj74il/AADHVj0hDxxo0yyv43Myvg65a?dl=0
