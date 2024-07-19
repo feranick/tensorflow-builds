@@ -48,7 +48,10 @@ If compiling for a GPU-CUDA-based system:
 For versions of TF < 2.17.0:
 `bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package`
 
-To create a wheel package:
+Wheel packages will be located here:
+`/tensorflow/bazel-bin/tensorflow/tools/pip_package/wheel_house`
+
+For versions of TF < 2.17.0, to create a wheel package, issue the colloing command. 
 `bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg`
 
 ** Additional configuration**:
