@@ -76,6 +76,14 @@ Linux distributions may come with outdated version of compilers and libraries th
 
 Choose the image you need from here: https://hub.docker.com/r/tensorflow/build/tags
 
+You can transfer the binaries from the docker image from your host using:
+
+`docker cp <containerId>:/tensorflow/bazel-bin/tensorflow/tools/pip_package/wheel_house /host/path/target`
+
+where the `<containerID>` may be found, while the container is running, with:
+
+`docker ps -a`
+
 Once completed, you can purge all docker images with:
 
 `docker system prune -a`
