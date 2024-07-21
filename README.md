@@ -31,6 +31,8 @@ Compilation was carried out using -mnative flags.
 
 ## Configure
 
+Run configure to setup your compilation:
+
 ##
     ./configure
 
