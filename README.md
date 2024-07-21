@@ -18,7 +18,8 @@ sudo pip3 install keras_preprocessing --no-deps
 ```
 Compilation was carried out using -mnative flags.
 
-`git clone https://github.com/tensorflow/tensorflow`
+##
+        git clone https://github.com/tensorflow/tensorflow
 
 `cd tensorflow`
 
@@ -31,7 +32,8 @@ Compilation was carried out using -mnative flags.
 ***Note***
 During compilations, additional can be added when asked, and will be included through the flag `--config=opt`. These are recommended:
 
-`-Wno-sign-compare -Wno-error=unused-command-line-argument -O3`
+##
+        -Wno-sign-compare -Wno-error=unused-command-line-argument -O3
 
 ## Compilation
 
