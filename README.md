@@ -13,7 +13,11 @@ These packages were compiled using standard tensorflow [compilation             
 Prerequiresites and installed packages:
 ##
         sudo apt install libstdc++-12-dev:amd64 python3-pip python3-wheel python3-requests patchelf python-is-python3
+        
+##
         sudo pip3 install pip numpy packaging opt_einsum grpcio flatbuf
+        
+##
         sudo pip3 install keras_preprocessing --no-deps
 
 Compilation was carried out using -mnative flags.
