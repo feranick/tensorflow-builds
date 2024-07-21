@@ -103,6 +103,14 @@ Once completed, you can purge all docker images with:
 
 ##
         docker system prune -a
+        
+Alternatively, you can install `openssh-client` to enable `scp` and therefore transfer from the docker image to the host:
+
+##
+        sudo apt update; sudo apt install openssh-client
+        
+##
+        cp bazel-bin/tensorflow/tools/pip_package/wheel_house/* user@host.com
 
 # GPU Support
 Binaries are build using CUDA Toolkit 12.2. [You may need to activate NVidia develoepr repos](https://developer.nvidia.com/cuda-toolkit)
