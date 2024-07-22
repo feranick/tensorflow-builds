@@ -6,7 +6,38 @@ Tensorflow building information and binaries for selected platforms.
 **Use at your own risk**. No warranty or guarantee is provided.
 
 # Compilation
-## Pre-requisites
+
+## Pre-requisites: Docker builds
+Linux distributions may come with outdated version of compilers and libraries that are not compatible with the most recent version of TF. The easiest way to compile it is to use docker. Run this command to get a docker image on a bash, from where you can then proceed with the regular compilation:
+
+##
+    docker run --rm -it --entrypoint bash tensorflow/build:2.17-python3.10
+
+Choose the image you need from here: https://hub.docker.com/r/tensorflow/build/tags
+
+You can transfer the binaries from the docker image from your host using:
+
+`docker cp <containerId>:/tensorflow/bazel-bin/tensorflow/tools/pip_package/wheel_house /host/path/target`
+
+where the `<containerID>` may be found, while the container is running, with:
+
+##
+    docker ps -a
+
+Once completed, you can purge all docker images with:
+
+##
+    docker system prune -a
+        
+Alternatively, you can install `openssh-client` to enable `scp` and therefore transfer from the docker image to the host:
+
+##
+    sudo apt update; sudo apt install openssh-client
+        
+##
+    cp bazel-bin/tensorflow/tools/pip_package/wheel_house/* user@host.com
+
+## Pre-requisites: Native builds
 
 These packages were compiled using standard tensorflow [compilation                                                        guidelines](https://www.tensorflow.org/install/install_sources). 
 
@@ -69,10 +100,6 @@ For versions of TF < 2.17.0, to create a wheel package, issue the colloing comma
 ##
     bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
 
-** Additional configuration**:
-./configure was run with support for:
-- Google Cloud Compute, Amazon AWS, Hadoop File System support.
-
 ## Optimizations
 For additional optimizations, build with `native` support can be enabled by adding the folllowing to `.bazelrc` after running the above `./configure` step
 
@@ -83,36 +110,6 @@ or (for MacOS):
 ```
 build:macos --copt=-march=native
 ```
-
-## Docker builds
-Linux distributions may come with outdated version of compilers and libraries that are not compatible with the most recent version of TF. The easiest way to compile it is to use docker. Run this command to get a docker image on a bash, from where you can then proceed with the regular compilation:
-
-##
-    docker run --rm -it --entrypoint bash tensorflow/build:2.17-python3.10
-
-Choose the image you need from here: https://hub.docker.com/r/tensorflow/build/tags
-
-You can transfer the binaries from the docker image from your host using:
-
-`docker cp <containerId>:/tensorflow/bazel-bin/tensorflow/tools/pip_package/wheel_house /host/path/target`
-
-where the `<containerID>` may be found, while the container is running, with:
-
-##
-    docker ps -a
-
-Once completed, you can purge all docker images with:
-
-##
-    docker system prune -a
-        
-Alternatively, you can install `openssh-client` to enable `scp` and therefore transfer from the docker image to the host:
-
-##
-    sudo apt update; sudo apt install openssh-client
-        
-##
-    cp bazel-bin/tensorflow/tools/pip_package/wheel_house/* user@host.com
 
 # GPU Support
 Binaries are build using CUDA Toolkit 12.2. [You may need to activate NVidia develoepr repos](https://developer.nvidia.com/cuda-toolkit)
