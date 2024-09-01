@@ -71,7 +71,7 @@ Compilation was carried out using -mnative flags.
 During compilations, additional can be added when asked, and will be included through the flag `--config=opt`. These are recommended:
 
 ##
-    -Wno-sign-compare -Wno-error=unused-command-line-argument -O3
+    -Wno-sign-compare -Wno-error=unused-command-line-argument -Wno-gnu-offsetof-extensions -O3
 
 ## Compilation
 
