@@ -84,7 +84,7 @@ For versions of TF < 2.17.0:
 ##
     bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package
 
-If compiling for a GPU-CUDA-based system, using Python3.10:
+If compiling for a GPU-CUDA-based system, using Python 3.10:
 ##
     export TF_PYTHON_VERSION=3.10; bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow
 
@@ -96,7 +96,7 @@ Wheel packages will be located here:
 ##
     /tensorflow/bazel-bin/tensorflow/tools/pip_package/wheel_house
 
-For versions of TF < 2.17.0, to create a wheel package, issue the colloing command. 
+ONLY for versions of TF < 2.17.0, to create a wheel package, issue the folloing command. 
 ##
     bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
 
