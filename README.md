@@ -78,7 +78,7 @@ During compilations, additional can be added when asked, and will be included th
 If compiling for a CPU-based system, using Python3.10:
 
 ##
-    export TF_PYTHON_VERSION=3.10; bazel build --config=opt //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow_cpu
+    export TF_PYTHON_VERSION=3.12; bazel build --config=opt //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow_cpu
 
 For versions of TF < 2.17.0:
 ##
@@ -86,7 +86,7 @@ For versions of TF < 2.17.0:
 
 If compiling for a GPU-CUDA-based system, using Python 3.10:
 ##
-    export TF_PYTHON_VERSION=3.10; bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow
+    export TF_PYTHON_VERSION=3.12; bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow
 
 For versions of TF < 2.17.0:
 ##
