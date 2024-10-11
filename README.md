@@ -17,8 +17,9 @@ docker run --rm -it --entrypoint bash tensorflow/build:2.17-python3.10
 Choose the image you need from here: https://hub.docker.com/r/tensorflow/build/tags
 
 You can transfer the binaries from the docker image from your host using:
-
-`docker cp <containerId>:/tensorflow/bazel-bin/tensorflow/tools/pip_package/wheel_house /host/path/target`
+```
+docker cp <containerId>:/tensorflow/bazel-bin/tensorflow/tools/pip_package/wheel_house /host/path/target`
+```
 
 where the `<containerID>` may be found, while the container is running, with:
 ```
