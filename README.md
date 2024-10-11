@@ -63,7 +63,7 @@ git checkout v2.17.0
 During compilations, additional can be added when asked, and will be included through the flag `--config=opt`. These are recommended:
 
 ```
--Wno-sign-compare -Wno-error=unused-command-line-argument -Wno-gnu-offsetof-extensions -O3
+-Wno-sign-compare -Wno-error=unused-command-line-argument -Wno-gnu-offsetof-extensions -O3 -march=native
 ```
 
 You can check the CPU optimization flags supported by your CP by running:
@@ -74,21 +74,11 @@ cat /proc/cpuinfo | grep flags
 # macOS
 sysctl -a | grep "machdep.cpu.*features:"
 ```
-Some of the flags that may be available are:
+You can selectively target some of the flags that may be available:
 ```
 -mavx -mavx2 -mfma -msse4.2
 -msse3 -msse4.1 -msse4.2 -mavx -mavx2 -mfma
 -mavx512f -mavx512vnni
-```
-
-For additional optimizations, build with `native` support can be enabled by adding the folllowing to `.bazelrc` after running the above `./configure` step:
-
-```
-# Linux
-build:linux --copt=-march=native
-
-# macOS
-build:macos --copt=-march=native
 ```
 
 ## Compilation
