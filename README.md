@@ -64,14 +64,40 @@ Compilation was carried out using -mnative flags.
 
 ## Configure
 
-##
+```
     ./configure
-
-***Note***
+```
+### Compilation Flags and optimization
 During compilations, additional can be added when asked, and will be included through the flag `--config=opt`. These are recommended:
 
-##
+```
     -Wno-sign-compare -Wno-error=unused-command-line-argument -Wno-gnu-offsetof-extensions -O3
+```
+
+You can check the CPU optimization flags supported by your CP by running:
+```
+# macOS
+sysctl -a | grep "machdep.cpu.*features:"
+
+# Linux
+cat /proc/cpuinfo | grep flags
+```
+Some of the flags that may be available are:
+```
+-mavx -mavx2 -mfma -msse4.2
+-msse3 -msse4.1 -msse4.2 -mavx -mavx2 -mfma
+-mavx512f -mavx512vnni
+```
+
+For additional optimizations, build with `native` support can be enabled by adding the folllowing to `.bazelrc` after running the above `./configure` step:
+
+```
+build:linux --copt=-march=native
+```
+or (for MacOS):
+```
+build:macos --copt=-march=native
+```
 
 ## Compilation
 
@@ -99,17 +125,6 @@ Wheel packages will be located here:
 ONLY for versions of TF < 2.17.0, to create a wheel package, issue the folloing command. 
 ##
     bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
-
-## Optimizations
-For additional optimizations, build with `native` support can be enabled by adding the folllowing to `.bazelrc` after running the above `./configure` step
-
-```
-build:linux --copt=-march=native
-```
-or (for MacOS):
-```
-build:macos --copt=-march=native
-```
 
 # GPU Support
 Binaries are build using CUDA Toolkit 12.2. [You may need to activate NVidia develoepr repos](https://developer.nvidia.com/cuda-toolkit)
