@@ -10,8 +10,9 @@ Tensorflow building information and binaries for selected platforms.
 ## Pre-requisites: Docker builds
 Linux distributions may come with outdated version of compilers and libraries that are not compatible with the most recent version of TF. The easiest way to compile it is to use docker. Run this command to get a docker image on a bash, from where you can then proceed with the regular compilation:
 
-##
+```
     docker run --rm -it --entrypoint bash tensorflow/build:2.17-python3.10
+```
 
 Choose the image you need from here: https://hub.docker.com/r/tensorflow/build/tags
 
@@ -20,47 +21,37 @@ You can transfer the binaries from the docker image from your host using:
 `docker cp <containerId>:/tensorflow/bazel-bin/tensorflow/tools/pip_package/wheel_house /host/path/target`
 
 where the `<containerID>` may be found, while the container is running, with:
-
-##
+```
     docker ps -a
+```
 
 Once completed, you can purge all docker images with:
-
-##
+```
     docker system prune -a
-        
-Alternatively, you can install `openssh-client` to enable `scp` and therefore transfer from the docker image to the host:
+```
 
-##
+Alternatively, you can install `openssh-client` to enable `scp` and therefore transfer from the docker image to the host:
+```
     sudo apt update; sudo apt install openssh-client
-        
-##
     cp bazel-bin/tensorflow/tools/pip_package/wheel_house/* user@host.com
+```
 
 ## Pre-requisites: Native builds
 
 These packages were compiled using standard tensorflow [compilation                                                        guidelines](https://www.tensorflow.org/install/install_sources). 
 
 Prerequiresites and installed packages:
-##
+```
     sudo apt install libstdc++-12-dev:amd64 python3-pip python3-wheel python3-requests patchelf python-is-python3
-        
-##
     sudo pip3 install pip numpy packaging opt_einsum grpcio flatbuf
-        
-##
     sudo pip3 install keras_preprocessing --no-deps
-
-Compilation was carried out using -mnative flags.
-
-##
+```
+Get `tensorflow` source and desired version:
+```
     git clone https://github.com/tensorflow/tensorflow
-
-##
     cd tensorflow
-
-##
     git checkout v2.17.0
+```
 
 ## Configure
 
@@ -76,11 +67,11 @@ During compilations, additional can be added when asked, and will be included th
 
 You can check the CPU optimization flags supported by your CP by running:
 ```
-# macOS
-sysctl -a | grep "machdep.cpu.*features:"
-
 # Linux
 cat /proc/cpuinfo | grep flags
+
+# macOS
+sysctl -a | grep "machdep.cpu.*features:"
 ```
 Some of the flags that may be available are:
 ```
@@ -92,40 +83,43 @@ Some of the flags that may be available are:
 For additional optimizations, build with `native` support can be enabled by adding the folllowing to `.bazelrc` after running the above `./configure` step:
 
 ```
+# Linux
 build:linux --copt=-march=native
-```
-or (for MacOS):
-```
+
+# macOS
 build:macos --copt=-march=native
 ```
 
 ## Compilation
 
 If compiling for a CPU-based system, using Python 3.12:
-
-##
+```
     export TF_PYTHON_VERSION=3.12; bazel build --config=opt //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow_cpu
+```
 
 For versions of TF < 2.17.0:
-##
+```
     bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package
+```
 
 If compiling for a GPU-CUDA-based system, using Python 3.12:
-##
+```
     export TF_PYTHON_VERSION=3.12; bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow
+```
 
 For versions of TF < 2.17.0:
-##
+```
     bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package
-
+```
 Wheel packages will be located here:
-##
+```
     /tensorflow/bazel-bin/tensorflow/tools/pip_package/wheel_house
+```
 
 ONLY for versions of TF < 2.17.0, to create a wheel package, issue the folloing command. 
-##
+```
     bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
-
+```
 # GPU Support
 Binaries are build using CUDA Toolkit 12.2. [You may need to activate NVidia develoepr repos](https://developer.nvidia.com/cuda-toolkit)
 Binaries with NVidia GPU support TensorRT support (v.8.9) and libnccl2.
