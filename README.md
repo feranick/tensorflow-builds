@@ -125,21 +125,13 @@ Binaries are build using CUDA Toolkit 12.2. [You may need to activate NVidia dev
 Binaries with NVidia GPU support TensorRT support (v.8.9) and libnccl2.
 
 To compile with both, you need binaries from NVidia, installed using apt-get. From there:
-
-##
+```
     sudo apt-get install tensorrt libnccl2 libnccl-dev, tensorrt
-
-##
     cd /usr/local/cuda-12.2
-
-##
     sudo ln -s /usr/include/nccl.h include
-
-##
     sudo mkdir lib
-
-##
     sudo ln -s /usr/lib/x86_64-linux-gnu/libnccl.so.2 lib
+```
 
 # Binaries:
 https://www.dropbox.com/sh/f40eb6xsioj74il/AADHVj0hDxxo0yyv43Myvg65a?dl=0
@@ -147,10 +139,10 @@ https://www.dropbox.com/sh/f40eb6xsioj74il/AADHVj0hDxxo0yyv43Myvg65a?dl=0
 # Supported platforms:
  
 Currently supported platforms
-- MacOS - 14.5, no GPU, Python 3.11
+- MacOS - 15.0, no GPU, Python 3.12
 - Linux x86-64:
-  - Ubuntu 22.04, no GPU, Python 3.10 
-  - Ubuntu 22.04, CUDA 12.3, Python3.10
+  - Ubuntu 24.04, no GPU, Python 3.12
+  - Ubuntu 24.04, CUDA 12.5, Python3.12
   
 ## Benchmarking:
 
