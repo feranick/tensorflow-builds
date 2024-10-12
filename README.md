@@ -109,13 +109,16 @@ ONLY for versions of TF < 2.17.0, to create a wheel package, issue the following
 bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
 ```
 # GPU Support
-Binaries are build using CUDA Toolkit 12.2. [You may need to activate NVidia develoepr repos](https://developer.nvidia.com/cuda-toolkit)
-Binaries with NVidia GPU support TensorRT support (v.8.9) and libnccl2.
-
-To compile with both, you need binaries from NVidia, installed using apt-get. From there:
+Binaries are build using:
+- CUDA Toolkit 12.5
+- cuDNN 9
+- TensorRT 8.6.1
+ 
+[You may need to activate NVidia develoepr repos](https://developer.nvidia.com/cuda-toolkit)
+To compile with the correct libraries, you need binaries from NVidia and these following commands:
 ```
 sudo apt-get install tensorrt libnccl2 libnccl-dev, tensorrt
-cd /usr/local/cuda-12.2
+cd /usr/local/cuda-12.5
 sudo ln -s /usr/include/nccl.h include
 sudo mkdir lib
 sudo ln -s /usr/lib/x86_64-linux-gnu/libnccl.so.2 lib
