@@ -59,6 +59,9 @@ git checkout v2.17.0
 ```
 ./configure
 ```
+
+If GPU support is enabled (via CUDA), do not specify any local or remote path/version, just press ENTER. 
+
 ### Compilation Flags and optimization
 During compilations, additional can be added when asked, and will be included through the flag `--config=opt`. These are recommended:
 
@@ -76,8 +79,11 @@ export TF_PYTHON_VERSION=3.12; bazel build --config=opt //tensorflow/tools/pip_p
     
 # CPU, TF < 2.17.0
 bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package
+
+# GPU, Python 3.12, TF 2.18.0 or newer
+export TF_PYTHON_VERSION=3.12; bazel build --config=opt --config=cuda_wheel //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow
     
-# GPU, Python 3.12, TF 2.17.0 or newer
+# GPU, Python 3.12, TF 2.17.0
 export TF_PYTHON_VERSION=3.12; bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow
     
 # GPU, TF < 2.17.0
