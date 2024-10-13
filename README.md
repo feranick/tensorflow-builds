@@ -66,21 +66,6 @@ During compilations, additional can be added when asked, and will be included th
 -Wno-sign-compare -Wno-error=unused-command-line-argument -Wno-gnu-offsetof-extensions -O3 -march=native
 ```
 
-You can check the CPU optimization flags supported by your CP by running:
-```
-# Linux
-cat /proc/cpuinfo | grep flags
-
-# macOS
-sysctl -a | grep "machdep.cpu.*features:"
-```
-You can selectively target some of the flags that may be available:
-```
--mavx -mavx2 -mfma -msse4.2
--msse3 -msse4.1 -msse4.2 -mavx -mavx2 -mfma
--mavx512f -mavx512vnni
-```
-
 ## Compilation
 
 If compiling for a CPU-based system, using Python 3.12:
@@ -122,6 +107,22 @@ cd /usr/local/cuda-12.5
 sudo ln -s /usr/include/nccl.h include
 sudo mkdir lib
 sudo ln -s /usr/lib/x86_64-linux-gnu/libnccl.so.2 lib
+```
+
+# Additional Optimization flags
+You can check the CPU optimization flags supported by your CP by running:
+```
+# Linux
+cat /proc/cpuinfo | grep flags
+
+# macOS
+sysctl -a | grep "machdep.cpu.*features:"
+```
+You can selectively target some of the flags that may be available:
+```
+-mavx -mavx2 -mfma -msse4.2
+-msse3 -msse4.1 -msse4.2 -mavx -mavx2 -mfma
+-mavx512f -mavx512vnni
 ```
 
 # Binaries:
