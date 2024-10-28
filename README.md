@@ -70,23 +70,24 @@ During compilations, additional can be added when asked, and will be included th
 ```
 
 ## Compilation
-
-If compiling for a CPU-based system, using Python 3.12:
-    
+CPU-based system, Python 3.12, TF 2.17.0 or newer:
 ```
-# CPU, Python 3.12, TF 2.17.0 or newer
 export TF_PYTHON_VERSION=3.12; bazel build --config=opt //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow
-    
-# CPU, TF < 2.17.0
+'''    
+CPU-based system, TF < 2.17.0: 
+'''
 bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package
-
-# GPU, Python 3.12, TF 2.18.0 or newer
+'''
+GPU-based system, Python 3.12, TF 2.18.0 or newer
+'''
 export TF_PYTHON_VERSION=3.12; bazel build --config=opt --config=cuda_wheel //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow
-    
-# GPU, Python 3.12, TF 2.17.0
+'''    
+GPU-based system, Python 3.12, TF 2.17.0
+'''
 export TF_PYTHON_VERSION=3.12; bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow
-    
-# GPU, TF < 2.17.0
+'''    
+GPU-based system, TF < 2.17.0
+'''
 bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package
 ```
 
