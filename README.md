@@ -70,7 +70,7 @@ During compilations, additional can be added when asked, and will be included th
 ```
 
 ## Compilation
-CPU-based system, Python 3.12, TF 2.17.0 or newer:
+CPU-based system, Python 3.12, TF 2.18.0 or newer:
 ```
 export TF_PYTHON_VERSION=3.12; bazel build --config=opt //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow
 ```    
