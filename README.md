@@ -151,4 +151,8 @@ There are several benchmarking options. One derived from [here](https://github.c
     python3 benchmark.py  
 
 ## Known Issues:
-1. As of version `2.15.0`, Tensorflow as moved to `clang` as the main compiler. Unfortunately compilation is broken in Ubuntu 22.04 with GPU support due to an outdated version of `clang`. The use of docker is recommended (see above). 
+1. If compiling on older NVidia hardware, when running TensorFlow v2.18.0 or higher, a crash may occur becuase the system may not be able to find `libdevice`. Add the following to your `.bashrc` or `.profile`
+
+    ```
+    export XLA_FLAGS=--xla_gpu_cuda_data_dir=/usr/local/cuda-12.5
+    ```
