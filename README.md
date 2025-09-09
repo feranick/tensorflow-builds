@@ -151,7 +151,13 @@ There are several benchmarking options. One derived from [here](https://github.c
     python3 benchmark.py  
 
 ## Known Issues:
-1. If compiling on older NVidia hardware, when running TensorFlow v2.18.0 or higher, a crash may occur becuase the system may not be able to find `libdevice`. Add the following to your `.bashrc` or `.profile`
+1. When compiling for Apple Silicon (M1,M2,M3,M4) on MacOS, the build process may not fully recognize the build target. Add the ``--cpu=darwin_arm64`` to the compilation command:
+
+    ```
+    export TF_PYTHON_VERSION=3.12; bazel build --config=opt //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow --cpu=darwin_arm64
+    ```
+
+2. If compiling on older NVidia hardware, when running TensorFlow v2.18.0 or higher, a crash may occur becuase the system may not be able to find `libdevice`. Add the following to your `.bashrc` or `.profile`
 
     ```
     export XLA_FLAGS=--xla_gpu_cuda_data_dir=/usr/local/cuda-12.5
