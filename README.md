@@ -80,7 +80,7 @@ bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package
 ```
 GPU-based system, Python 3.12, TF 2.18.0 or newer
 ```
-export TF_PYTHON_VERSION=3.12; bazel build --config=opt --config=cuda_wheel //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow
+export TF_PYTHON_VERSION=3.12; bazel build --config=opt --config=cuda_nvcc --config=cuda_wheel //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow
 ```    
 GPU-based system, Python 3.12, TF 2.17.0
 ```
@@ -162,3 +162,9 @@ There are several benchmarking options. One derived from [here](https://github.c
     ```
     export XLA_FLAGS=--xla_gpu_cuda_data_dir=/usr/local/cuda-12.5
     ```
+    
+3. When compiling TensorFlow 2.29.x on Ubuntu 24.04, clang won't work. in `./configure` when asked, "Do you want to use Clang to build TensorFlow?" respond NO. When prompted for the GCC host compiler path → /usr/bin/x86_64-linux-gnu-gcc-12 If gcc12 is not installed, proceed with:
+
+   ```
+   sudo apt-get install gcc-12 g++-12
+   ```  
