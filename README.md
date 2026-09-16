@@ -39,7 +39,7 @@ cp bazel-bin/tensorflow/tools/pip_package/wheel_house/* user@host.com
 
 ## Pre-requisites: Native builds
 
-These packages were compiled using standard tensorflow [compilation                                                        guidelines](https://www.tensorflow.org/install/install_sources). 
+These packages were compiled using standard tensorflow [compilation guidelines](https://www.tensorflow.org/install/install_sources). 
 
 Prerequiresites and installed packages:
 ```
@@ -94,6 +94,16 @@ bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_
 Wheel packages will be located here:
 ```
 /tensorflow/bazel-bin/tensorflow/tools/pip_package/wheel_house
+```
+
+To install (no cuda-libraries):
+```
+sudo pip3 install --upgrade /path-to-wheel/tensorflow.whl
+```
+
+To install (with cuda libraries):
+```
+sudo pip3 install --upgrade /path-to-wheel/tensorflow.whl[and-cuda]
 ```
 
 ONLY for versions of TF < 2.17.0, to create a wheel package, issue the following command. 
@@ -168,3 +178,9 @@ There are several benchmarking options. One derived from [here](https://github.c
    ```
    sudo apt-get install gcc-12 g++-12
    ```  
+
+4. When compiling for Nvidia Blackwell GPUs (compute capabilities: 12.0), the ./configure script may fail to register it. You can force it (for tensorflow 2.21) by running: 
+
+   '''
+   bazel build --config=opt --config=cuda_wheel --config=nonccl   --repo_env=WHEEL_NAME=tensorflow   --repo_env=HERMETIC_CUDA_COMPUTE_CAPABILITIES=sm_120,compute_120   --repository_cache=$HOME/.cache/bazel_repo_cache   //tensorflow/tools/pip_package:wheel
+   '''
