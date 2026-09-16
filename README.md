@@ -137,11 +137,11 @@ https://www.dropbox.com/sh/f40eb6xsioj74il/AADHVj0hDxxo0yyv43Myvg65a?dl=0
 
 # Supported platforms:
  
-Currently supported platforms
+Currently supported platforms (TensorFlow v2.21.0)
 - MacOS - 15.0, no GPU, Python 3.12
 - Linux x86-64:
   - Ubuntu 24.04, no GPU, Python 3.12
-  - Ubuntu 24.04, CUDA 12.5, Python3.12
+  - Ubuntu 24.04, CUDA 12.9.1, cudnn 9.10.2, Python3.12
   
 ## Benchmarking:
 
@@ -151,7 +151,7 @@ There are several benchmarking options. One derived from [here](https://github.c
     python3 benchmark.py  
 
 ## Known Issues:
-1. When compiling for Apple Silicon (M1,M2,M3,M4) on MacOS, the build process may not fully recognize the build target. Add the ``--cpu=darwin_arm64`` to the compilation command:
+1. When compiling for Apple Silicon (M1,M2,M3,M4,M5) on MacOS, the build process may not fully recognize the build target. Add the ``--cpu=darwin_arm64`` to the compilation command:
 
     ```
     export TF_PYTHON_VERSION=3.12; bazel build --config=opt //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow --cpu=darwin_arm64
@@ -163,7 +163,7 @@ There are several benchmarking options. One derived from [here](https://github.c
     export XLA_FLAGS=--xla_gpu_cuda_data_dir=/usr/local/cuda-12.5
     ```
     
-3. When compiling TensorFlow 2.29.x on Ubuntu 24.04, clang won't work. in `./configure` when asked, "Do you want to use Clang to build TensorFlow?" respond NO. When prompted for the GCC host compiler path → /usr/bin/x86_64-linux-gnu-gcc-12 If gcc12 is not installed, proceed with:
+3. When compiling TensorFlow 2.19.x on Ubuntu 24.04, clang may not work. If so, In `./configure` when asked, "Do you want to use Clang to build TensorFlow?" respond NO. When prompted for the GCC host compiler path → /usr/bin/x86_64-linux-gnu-gcc-12 If gcc12 is not installed, proceed with:
 
    ```
    sudo apt-get install gcc-12 g++-12
