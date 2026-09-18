@@ -318,8 +318,44 @@ A venv rather than `sudo pip3` into system Python makes a hand-built wheel much
 harder to clobber. Worth doing given what a rebuild costs.
 
 ---
+## 6. Persistance
+Your nvidia-smi output shows Persistence-M: Off. If you launch CUDA compute jobs, Python scripts, or containerized workloads, having persistence mode disabled forces the driver and GSP firmware to tear down and reinitialize every time an application closes, introducing execution latency.
+Set persistence mode directly in the running kernel driver:
+```bash
+sudo nvidia-smi -pm 1
+```
+Verify it is active:
+```bash
+nvidia-smi -q | grep "Persistence Mode"
+```
+Expected output: Persistence Mode : Enabled
+Make It Persistent Across Reboots: Add the missing [Install] target using a systemd drop-in override so systemctl enable can create the proper startup symlink:
+Create the override directory
+```bash
+sudo mkdir -p /etc/systemd/system/nvidia-persistenced.service.d
+```
+Append the Install target
+```bash
+cat << 'EOF' | sudo tee /etc/systemd/system/nvidia-persistenced.service.d/override.conf
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+Reload systemd and enable the daemon
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable --now nvidia-persistenced
+```
 
-## 6. Symptom → cause
+Verification: Confirm the service is running and persistence mode remains active:
+```bash
+systemctl status nvidia-persistenced
+nvidia-smi -q | grep "Persistence Mode"
+```
+
+The daemon will now start automatically at boot, keeping the GSP firmware context and driver initialized in memory.
+
+## 7. Symptom → cause
 
 | Symptom | Cause |
 |---|---|
@@ -338,7 +374,7 @@ harder to clobber. Worth doing given what a rebuild costs.
 
 ---
 
-## 7. Things that cost time and did not help
+## 8. Things that cost time and did not help
 
 - Patching `LLVM_SHA256` in the cached XLA repo — the pin was correct; the download
   was the variable
