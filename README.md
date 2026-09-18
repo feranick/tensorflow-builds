@@ -181,6 +181,11 @@ There are several benchmarking options. One derived from [here](https://github.c
 
 4. When compiling for Nvidia Blackwell GPUs (compute capabilities: 12.0), the ./configure script may fail to register it. You can force it (for tensorflow 2.21) by running: 
 
-   '''
-   bazel build --config=opt --config=cuda_wheel --config=nonccl   --repo_env=WHEEL_NAME=tensorflow   --repo_env=HERMETIC_CUDA_COMPUTE_CAPABILITIES=sm_120,compute_120   --repository_cache=$HOME/.cache/bazel_repo_cache   //tensorflow/tools/pip_package:wheel
-   '''
+   ```
+   nohup bazel build --config=opt --config=cuda_wheel --config=nonccl \
+  --repo_env=WHEEL_NAME=tensorflow \
+  --repo_env=HERMETIC_CUDA_COMPUTE_CAPABILITIES=sm_120,compute_120 \
+  --repository_cache=$HOME/.cache/bazel_repo_cache \
+  --distdir=$HOME/bazel_distdir \
+  //tensorflow/tools/pip_package:wheel > tf_build2.log 2>&1 &
+   ```
