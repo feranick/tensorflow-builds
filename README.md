@@ -110,12 +110,11 @@ ONLY for versions of TF < 2.17.0, to create a wheel package, issue the following
 ```
 bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
 ```
-# GPU Support
-Binaries are build using:
-- CUDA Toolkit 12.5
-- cuDNN 9
-- TensorRT 8.6.1
- 
+# Build with local GPU binaries
+It is recommended to use hermetic NVidia binaries. These are installed with `pip` via the extra tag `[and-cuda].`
+If you want to compile against local Nvidia binaries in your systems, the suggested dependencies for TF 2.21.x or higher are:
+- CUDA Toolkit 12.9.1
+- cuDNN 9.10.2
 [You may need to activate NVidia develoepr repos](https://developer.nvidia.com/cuda-toolkit)
 To compile with the correct libraries, you need binaries from NVidia and these following commands:
 ```
@@ -179,6 +178,7 @@ There are several benchmarking options. One derived from [here](https://github.c
    sudo apt-get install gcc-12 g++-12
    ```  
 
+4. Python 3.14 is only supported in TensorFlow 2.22.x or higher.
 4. When compiling for Nvidia Blackwell GPUs (compute capabilities: 12.0), the ./configure script may fail to register it. You can force it (for tensorflow 2.21) by running: 
 
   ```
