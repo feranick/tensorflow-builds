@@ -61,6 +61,8 @@ git checkout v2.17.0
 ```
 
 If GPU support is enabled (via CUDA), do not specify any local or remote path/version, just press ENTER. 
+When asked for the Nvidia Compatibility, check the relevant one for your GPU based on this list:
+[https://developer.nvidia.com/cuda/gpus](https://developer.nvidia.com/cuda/gpus)
 
 ### Compilation Flags and optimization
 During compilations, additional can be added when asked, and will be included through the flag `--config=opt`. These are recommended:
