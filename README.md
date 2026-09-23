@@ -85,9 +85,9 @@ export TF_PYTHON_VERSION=3.12; bazel build --config=opt --repo_env=WHEEL_NAME=te
 
 For MacOS, to assure the minimum version of MacOS is listed in the final wheel package, add the following:
 ```
---macos_minimum_os=12.0 \
-  --action_env MACOSX_DEPLOYMENT_TARGET=12.0 \
-  --repo_env MACOSX_DEPLOYMENT_TARGET=12.0 \
+--macos_minimum_os=15.0 \
+  --action_env MACOSX_DEPLOYMENT_TARGET=15.0 \
+  --repo_env MACOSX_DEPLOYMENT_TARGET=15.0 \
 ```
     
 GPU-based system, Python 3.12
