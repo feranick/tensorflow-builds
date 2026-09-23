@@ -163,8 +163,10 @@ https://www.dropbox.com/sh/f40eb6xsioj74il/AADHVj0hDxxo0yyv43Myvg65a?dl=0
   
 ## Benchmarking:
 There are several benchmarking options. One derived from [here](https://github.com/tobigithub/tensorflow-deep-learning/wiki/tf-benchmarks) is provided. To run:
-##
+
+    ```
     python3 benchmark.py  
+    ```
 
 ## Known Issues:
 1. When compiling for Apple Silicon (M1,M2,M3,M4,M5) on MacOS, the build process may not fully recognize the build target. Add the ``--cpu=darwin_arm64`` to the compilation command:
