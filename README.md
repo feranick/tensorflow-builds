@@ -82,7 +82,7 @@ CPU-based system, Python 3.12
 ```
 export TF_PYTHON_VERSION=3.12; bazel build --config=opt --repo_env=WHEEL_NAME=tensorflow   --repository_cache=$HOME/.cache/bazel_repo_cache   --experimental_repository_downloader_retries=5   --http_timeout_scaling=3.0   //tensorflow/tools/pip_package:wheel
 ```    
-GPU-based system, Python 3.12, TF 2.18.0 or newer
+GPU-based system, Python 3.12
 ```
 export TF_PYTHON_VERSION=3.12; bazel build --config=opt --config=cuda_wheel --config=nonccl   --repo_env=WHEEL_NAME=tensorflow   --repository_cache=$HOME/.cache/bazel_repo_cache   --experimental_repository_downloader_retries=5   --http_timeout_scaling=3.0   //tensorflow/tools/pip_package:wheel
 ```    
@@ -100,15 +100,15 @@ sudo pip3 install --upgrade /path-to-wheel/tensorflow.whl[and-cuda]
 ```
 
 ## Compilation (Tensorflow 2.17.0 or older)
-CPU-based system, TF < 2.17.0: 
+CPU-based system: 
 ```
 bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package
 ```
-GPU-based system, Python 3.12, TF 2.17.0
+GPU-based system, Python 3.12
 ```
 export TF_PYTHON_VERSION=3.12; bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow
 ```    
-GPU-based system, TF < 2.17.0
+GPU-based system
 ```
 bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package
 ```
@@ -153,17 +153,16 @@ You can selectively target some of the flags that may be available:
 https://www.dropbox.com/sh/f40eb6xsioj74il/AADHVj0hDxxo0yyv43Myvg65a?dl=0
 
 # Supported platforms:
- 
-Currently supported platforms (TensorFlow v2.21.0)
-- MacOS - 15.0, no GPU, Python 3.12
+ Currently supported platforms (TensorFlow v2.21.0)
+- MacOS - 15.0, no GPU, Python 3.12 (tensorflow 2.19.0)
+- MacOS - 27.0, no GPU, Python 3.14 (tensorflow 2.22.0)
 - Linux x86-64:
   - Ubuntu 24.04, no GPU, Python 3.12
   - Ubuntu 24.04, CUDA 12.9.1, cudnn 9.10.2, Python3.12
+  - Ubuntu 26.04, CUDA 12.9.1, cudnn 9.10.2, Python3.14
   
 ## Benchmarking:
-
 There are several benchmarking options. One derived from [here](https://github.com/tobigithub/tensorflow-deep-learning/wiki/tf-benchmarks) is provided. To run:
-
 ##
     python3 benchmark.py  
 
