@@ -65,10 +65,17 @@ When asked for the Nvidia Compatibility, check the relevant one for your GPU bas
 [https://developer.nvidia.com/cuda/gpus](https://developer.nvidia.com/cuda/gpus)
 
 ### Compilation Flags and optimization
-During compilations, additional can be added when asked, and will be included through the flag `--config=opt`. These are recommended:
+During compilations, additional can be added when asked, and will be included through the flag `--config=opt`. 
+
+For Intel/AMD amd64 (x86-64):
 
 ```
 -Wno-sign-compare -Wno-error=unused-command-line-argument -Wno-gnu-offsetof-extensions -O3 -march=native
+```
+
+For Apple arm64 M-series (for example M4):
+```
+-Wno-sign-compare -Wno-error=unused-command-line-argument -Wno-gnu-offsetof-extensions -O3 -mcpu=apple-m4
 ```
 
 ## Compilation
