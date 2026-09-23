@@ -74,14 +74,22 @@ For Intel/AMD amd64 (x86-64):
 
 For Apple arm64 M-series (for example M4):
 ```
--Wno-sign-compare -Wno-error=unused-command-line-argument -Wno-gnu-offsetof-extensions -O3 -mcpu=apple-m4
+-Wno-sign-compare -Wno-error=unused-command-line-argument -Wno-gnu-offsetof-extensions -O3 -mcpu=apple-m4 
 ```
 
 ## Compilation (Tensorflow 2.18.0 or newer)
 CPU-based system, Python 3.12
 ```
 export TF_PYTHON_VERSION=3.12; bazel build --config=opt --repo_env=WHEEL_NAME=tensorflow   --repository_cache=$HOME/.cache/bazel_repo_cache   --experimental_repository_downloader_retries=5   --http_timeout_scaling=3.0   //tensorflow/tools/pip_package:wheel
-```    
+```
+
+For MacOS, to assure the minimum version of MacOS is listed in the final wheel package, add the following:
+```
+--macos_minimum_os=12.0 \
+  --action_env MACOSX_DEPLOYMENT_TARGET=12.0 \
+  --repo_env MACOSX_DEPLOYMENT_TARGET=12.0 \
+```
+    
 GPU-based system, Python 3.12
 ```
 export TF_PYTHON_VERSION=3.12; bazel build --config=opt --config=cuda_wheel --config=nonccl   --repo_env=WHEEL_NAME=tensorflow   --repository_cache=$HOME/.cache/bazel_repo_cache   --experimental_repository_downloader_retries=5   --http_timeout_scaling=3.0   //tensorflow/tools/pip_package:wheel
@@ -188,7 +196,7 @@ There are several benchmarking options. One derived from [here](https://github.c
    ```  
 
 4. Python 3.14 is only supported in TensorFlow 2.22.x or higher.
-4. When compiling for Nvidia Blackwell GPUs (compute capabilities: 12.0), the ./configure script may fail to register it. You can force it (for tensorflow 2.21) by running: 
+5. When compiling for Nvidia Blackwell GPUs (compute capabilities: 12.0), the ./configure script may fail to register it. You can force it (for tensorflow 2.21) by running: 
 
   ```
   nohup bazel build --config=opt --config=cuda_wheel --config=nonccl \
