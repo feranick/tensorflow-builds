@@ -66,7 +66,6 @@ When asked for the Nvidia Compatibility, check the relevant one for your GPU bas
 
 ### Compilation Flags and optimization
 During compilations, additional can be added when asked, and will be included through the flag `--config=opt`. 
-
 For Intel/AMD amd64 (x86-64):
 
 ```
@@ -78,19 +77,33 @@ For Apple arm64 M-series (for example M4):
 -Wno-sign-compare -Wno-error=unused-command-line-argument -Wno-gnu-offsetof-extensions -O3 -mcpu=apple-m4
 ```
 
-## Compilation
-CPU-based system, Python 3.12, TF 2.18.0 or newer:
+## Compilation (Tensorflow 2.18.0 or newer)
+CPU-based system, Python 3.12
 ```
 export TF_PYTHON_VERSION=3.12; bazel build --config=opt --repo_env=WHEEL_NAME=tensorflow   --repository_cache=$HOME/.cache/bazel_repo_cache   --experimental_repository_downloader_retries=5   --http_timeout_scaling=3.0   //tensorflow/tools/pip_package:wheel
 ```    
-CPU-based system, TF < 2.17.0: 
-```
-bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package
-```
 GPU-based system, Python 3.12, TF 2.18.0 or newer
 ```
 export TF_PYTHON_VERSION=3.12; bazel build --config=opt --config=cuda_wheel --config=nonccl   --repo_env=WHEEL_NAME=tensorflow   --repository_cache=$HOME/.cache/bazel_repo_cache   --experimental_repository_downloader_retries=5   --http_timeout_scaling=3.0   //tensorflow/tools/pip_package:wheel
 ```    
+Wheel packages will be located here:
+```
+/tensorflow/bazel-bin/tensorflow/tools/pip_package/wheel_house
+```
+To install (no cuda-libraries):
+```
+sudo pip3 install --upgrade /path-to-wheel/tensorflow.whl
+```
+To install (with cuda libraries):
+```
+sudo pip3 install --upgrade /path-to-wheel/tensorflow.whl[and-cuda]
+```
+
+## Compilation (Tensorflow 2.17.0 or older)
+CPU-based system, TF < 2.17.0: 
+```
+bazel build --config=opt //tensorflow/tools/pip_package:build_pip_package
+```
 GPU-based system, Python 3.12, TF 2.17.0
 ```
 export TF_PYTHON_VERSION=3.12; bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:wheel --repo_env=WHEEL_NAME=tensorflow
@@ -100,25 +113,11 @@ GPU-based system, TF < 2.17.0
 bazel build --config=opt --config=cuda //tensorflow/tools/pip_package:build_pip_package
 ```
 
-Wheel packages will be located here:
-```
-/tensorflow/bazel-bin/tensorflow/tools/pip_package/wheel_house
-```
-
-To install (no cuda-libraries):
-```
-sudo pip3 install --upgrade /path-to-wheel/tensorflow.whl
-```
-
-To install (with cuda libraries):
-```
-sudo pip3 install --upgrade /path-to-wheel/tensorflow.whl[and-cuda]
-```
-
-ONLY for versions of TF < 2.17.0, to create a wheel package, issue the following command. 
+To create a wheel package, issue the following command. 
 ```
 bazel-bin/tensorflow/tools/pip_package/build_pip_package /tmp/tensorflow_pkg
 ```
+
 # Build with local GPU binaries
 It is recommended to use hermetic NVidia binaries. These are installed with `pip` via the extra tag `[and-cuda].`
 If you want to compile against local Nvidia binaries in your systems, the suggested dependencies for TF 2.21.x or higher are:
