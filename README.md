@@ -195,8 +195,12 @@ There are several benchmarking options. One derived from [here](https://github.c
    sudo apt-get install gcc-12 g++-12
    ```  
 
-4. Python 3.14 is only supported in TensorFlow 2.22.x or higher.
-5. When compiling for Nvidia Blackwell GPUs (compute capabilities: 12.0), the ./configure script may fail to register it. You can force it (for tensorflow 2.21) by running: 
+4. If compilation fails early due to: `missing LC_UUID load command```: use the following:
+   ```
+   export BAZEL_USE_CPP_ONLY_TOOLCHAIN=1
+   ```
+5. Python 3.14 is only supported in TensorFlow 2.22.x or higher.
+6. When compiling for Nvidia Blackwell GPUs (compute capabilities: 12.0), the ./configure script may fail to register it. You can force it (for tensorflow 2.21) by running: 
 
   ```
   nohup bazel build --config=opt --config=cuda_wheel --config=nonccl \
