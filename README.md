@@ -77,6 +77,11 @@ For Apple arm64 M-series (for example M4):
 -Wno-sign-compare -Wno-error=unused-command-line-argument -Wno-gnu-offsetof-extensions -O3 -mcpu=apple-m4 
 ```
 
+Before you continue with the compilation, make sure the build is set for `release` not as a snapshot. In `.bazelrc` check that you have:
+```
+common --repo_env=ML_WHEEL_TYPE="release"
+```
+
 ## Compilation (Tensorflow 2.18.0 or newer)
 CPU-based system, Python 3.12
 ```
@@ -85,9 +90,7 @@ export TF_PYTHON_VERSION=3.12; bazel build --config=opt --repo_env=WHEEL_NAME=te
 
 For MacOS, to assure the minimum version of MacOS is listed in the final wheel package, add the following:
 ```
---macos_minimum_os=15.0 \
-  --action_env MACOSX_DEPLOYMENT_TARGET=15.0 \
-  --repo_env MACOSX_DEPLOYMENT_TARGET=15.0 \
+--macos_minimum_os=15.0 --action_env MACOSX_DEPLOYMENT_TARGET=15.0 --repo_env MACOSX_DEPLOYMENT_TARGET=15.0 \
 ```
     
 GPU-based system, Python 3.12
